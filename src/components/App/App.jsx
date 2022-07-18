@@ -17,13 +17,21 @@ const data = [
 
 function App() {
   const [search, setSearch] = useState('');
+  const [items, setItems] = useState(data);
+
+  // Simple filtering
+  useEffect(() => {
+    setItems(
+      data.filter((el) => el.toLowerCase().includes(search.toLowerCase()))
+    );
+  }, [search]);
 
   return (
     <div>
       <Search value={search} onChange={(e) => setSearch(e.target.value)}>
         Find course:
       </Search>
-      <List items={data} />
+      <List items={items} />
     </div>
   );
 }
